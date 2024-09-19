@@ -7,7 +7,6 @@ class RobotEnv:
         self.model = mujoco.MjModel.from_xml_path(xml_file)
         self.data = mujoco.MjData(self.model)
         
-        # Define observation and action spaces
         self.observation_space = self._get_obs().shape[0]
         self.action_space = self.model.nu
 
@@ -18,13 +17,10 @@ class RobotEnv:
         return self._get_obs()
 
     def step(self, action):
-        # Apply action
         self.data.ctrl[:] = action
         
-        # Simulate one step
         mujoco.mj_step(self.model, self.data)
         
-        # Get observation, reward, and done flag
         obs = self._get_obs()
         reward = self._get_reward()
         done = self._is_done()
@@ -32,18 +28,12 @@ class RobotEnv:
         return obs, reward, done, {}
 
     def _get_obs(self):
-        # Implement this method to return the observation
-        # For example, you might return joint positions and velocities
         return np.concatenate([self.data.qpos, self.data.qvel])
 
     def _get_reward(self):
-        # Implement your reward function here
-        # This is just a placeholder
         return 0.0
 
     def _is_done(self):
-        # Implement your termination condition here
-        # This is just a placeholder
         return False
 
     def render(self):
