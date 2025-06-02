@@ -1,0 +1,1 @@
+The idea being that the direction of a controller is given as part of the state for the model. If it moves in the direction the controller is stating, it obtains reward. The idea of this being that you could control a complex walkable agent in a real world environment with complex dynamics using _just_ a simple console controller.
